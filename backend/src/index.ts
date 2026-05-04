@@ -1,7 +1,7 @@
 import path from "path";
 import express from "express";
-import { ENV } from "./config/env.config";
-import { HTTP_CODES } from "./config/httpCodes.config";
+import { ENV } from "./config/env.config.js";
+import { HTTP_CODES } from "./config/httpCodes.config.js";
 
 const app = express();
 
@@ -11,7 +11,6 @@ app.get("/health", (req, res) => {
   res.status(HTTP_CODES.OK).json({ msg: "API is healthy" });
 });
 
-// Deployment ready
 if (ENV.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
