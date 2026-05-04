@@ -1,5 +1,7 @@
 # AGENTS.md
 
+** IF USER HAS NOT PROVIDED SUFFICIENT INFORMATION FOR THE QUESTION, ASK FURTHER CLARIFYING QUESTIONS UNTIL YOU REACH A 95% CERTAINTY **
+
 ## Project structure
 
 - `backend/` — Express 5 + TypeScript API (ESM, `"type": "module"`)
