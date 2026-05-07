@@ -15,11 +15,19 @@ const syncUser: InngestFunction.Any = inngest.createFunction(
     const { id, email_addresses, first_name, last_name, image_url } =
       event.data;
 
+    const primaryEmail = email_addresses?.[0]?.email_address;
+    if (!primaryEmail) {
+      console.warn(
+        `syncUser: no email address found for Clerk user ${id}, skipping.`,
+      );
+      return;
+    }
+
     const newUser: IUser = {
       clerkId: id,
-      email: email_addresses[0]?.email_address,
-      name: `${first_name || ""} ${last_name || ""}`,
-      profileImage: image_url,
+      email: primaryEmail,
+      name: `${first_name || ""} ${last_name || ""}`.trim() || "Unknown",
+      profileImage: image_url ?? "",
     };
 
     await User.create(newUser);
