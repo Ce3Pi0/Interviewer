@@ -14,8 +14,11 @@
   "type": "module",
   "dependencies": {
     "@clerk/express": "^2.1.13",
+    "@types/cors": "^2.8.19",
+    "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "inngest": "^4.3.0",
     "mongoose": "^9.6.1"
   },
   "devDependencies": {
