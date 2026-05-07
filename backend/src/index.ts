@@ -15,9 +15,9 @@ const __dirname = path.resolve();
 app.use(express.json());
 app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
 
-app.use("/api/v1/inngest", serve({ client: inngest, functions }));
+app.use(`${ENV.API_SUB_DOMAIN}/inngest`, serve({ client: inngest, functions }));
 
-app.get("/health", (req, res) => {
+app.get(`${ENV.API_SUB_DOMAIN}/health`, (req, res) => {
   res.status(HTTP_CODES.OK).json({ msg: "API is healthy" });
 });
 
