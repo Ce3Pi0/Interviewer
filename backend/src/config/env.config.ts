@@ -3,12 +3,13 @@ import dotenv from "dotenv";
 dotenv.config({ quiet: true });
 
 export const ENV = {
+  API_SUB_DOMAIN: process.env.API_SUB_DOMAIN || "/api/v1",
   PORT: process.env.PORT || 3000,
   DB_URL: process.env.DB_URL,
   NODE_ENV: process.env.NODE_ENV || "development",
   CLIENT_URL: process.env.CLIENT_URL || "http://localhost:5173",
   INNGEST_EVENT_KEY: process.env.INNGEST_EVENT_KEY,
-  INNGEST_SIGN_IN_KEY: process.env.INNGEST_SIGN_IN_KEY,
+  INNGEST_SIGNING_KEY: process.env.INNGEST_SIGNING_KEY,
   STREAM_API_KEY: process.env.STREAM_API_KEY,
   STREAM_API_SECRET: process.env.STREAM_API_SECRET,
   CLERK_PUBLISHABLE_KEY: process.env.CLERK_PUBLISHABLE_KEY,

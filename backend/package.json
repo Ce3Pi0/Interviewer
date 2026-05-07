@@ -19,7 +19,8 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "inngest": "^4.3.0",
-    "mongoose": "^9.6.1"
+    "mongoose": "^9.6.1",
+    "stream-chat": "^9.43.1"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
