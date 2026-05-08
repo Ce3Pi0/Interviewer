@@ -1,10 +1,14 @@
 import { Inngest, InngestFunction } from "inngest";
 import { connectToDb } from "./db.config.js";
-import User from "../models/User.model.js";
+import { User } from "../models/User.model.js";
 import { IUser } from "../interfaces/user.interface.js";
 import { deleteStreamUser, upsertStreamUser } from "./stream.config.js";
+import { ENV } from "./env.config.js";
 
-export const inngest = new Inngest({ id: "interviewer" });
+export const inngest = new Inngest({
+  id: "interviewer",
+  isDev: ENV.NODE_ENV === "development",
+});
 
 const syncUser: InngestFunction.Any = inngest.createFunction(
   {
