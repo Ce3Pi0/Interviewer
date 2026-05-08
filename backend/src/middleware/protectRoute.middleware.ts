@@ -28,11 +28,13 @@ export const protectRoute = async (
     req.user = user;
 
     next();
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error({
       status: HTTP_INTERNAL_SERVER_ERROR.code,
       msg: HTTP_INTERNAL_SERVER_ERROR.msg,
       err,
     });
+
+    next(err);
   }
 };

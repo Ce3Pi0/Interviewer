@@ -14,10 +14,9 @@ const app = express();
 app.use(express.json());
 app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
 app.use(`${ENV.API_SUB_DOMAIN}/inngest`, serve({ client: inngest, functions }));
-app.use(clerkMiddleware()); // This adds auth field ot req - req.auth()
-
+app.use(clerkMiddleware()); // This adds auth field to req - req.auth()
 app.use(`${ENV.API_SUB_DOMAIN}`, router);
 
 serveStatic(app);
 
-startServer(app);
+await startServer(app);

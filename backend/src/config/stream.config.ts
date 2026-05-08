@@ -12,9 +12,9 @@ export const chatClient = () => {
 
 export const upsertStreamUser = async (userData: UserResponse) => {
   try {
-    const res = await chatClient().upsertUser(userData);
-    console.log("Stream user upserted successfully", userData, res);
-  } catch (err: any) {
+    await chatClient().upsertUser(userData);
+    console.log("Stream user upserted successfully", userData.id);
+  } catch (err: unknown) {
     console.error("Error upserting stream user", err);
   }
 };
@@ -23,7 +23,7 @@ export const deleteStreamUser = async (userId: string) => {
   try {
     await chatClient().deleteUser(userId);
     console.log("Stream user deleted successfully");
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("Error deleting stream user", err);
   }
 };

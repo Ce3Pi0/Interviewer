@@ -8,7 +8,8 @@ export const startServer = async (app: Express) => {
     app.listen(ENV.PORT, () => {
       console.log(`Server is running on port ${ENV.PORT}`);
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("Error starting the server:", err);
+    process.exit(1);
   }
 };
