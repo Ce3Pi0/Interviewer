@@ -1,40 +1,24 @@
 import { getAuth } from "@clerk/express";
 import { NextFunction, Request, Response } from "express";
 import { User, IUserDocument } from "../models/User.model.js";
-import {
-  HTTP_INTERNAL_SERVER_ERROR,
-  HTTP_NOT_FOUND,
-  HTTP_UNAUTHORIZED,
-} from "../lib/httpError.js";
+import { HTTP_NOT_FOUND, HTTP_UNAUTHORIZED } from "../lib/httpError.js";
+import { HttpError } from "../config/httpError.config.js";
 
 export const protectRoute = async (
   req: Request,
   res: Response,
   next: NextFunction,
 ) => {
-  try {
-    const { userId } = getAuth(req);
+  const { userId } = getAuth(req);
 
-    if (!userId)
-      return res
-        .status(HTTP_UNAUTHORIZED.code)
-        .json({ msg: HTTP_UNAUTHORIZED.msg });
+  if (!userId)
+    throw new HttpError(HTTP_UNAUTHORIZED.message, HTTP_UNAUTHORIZED.code);
 
-    const user: IUserDocument | null = await User.findOne({ clerkId: userId });
+  const user: IUserDocument | null = await User.findOne({ clerkId: userId });
 
-    if (!user)
-      return res.status(HTTP_NOT_FOUND.code).json({ msg: HTTP_NOT_FOUND.msg });
+  if (!user) throw new HttpError("User not found", HTTP_NOT_FOUND.code);
 
-    req.user = user;
+  req.user = user;
 
-    next();
-  } catch (err: unknown) {
-    console.error({
-      status: HTTP_INTERNAL_SERVER_ERROR.code,
-      msg: HTTP_INTERNAL_SERVER_ERROR.msg,
-      err,
-    });
-
-    next(err);
-  }
+  next();
 };

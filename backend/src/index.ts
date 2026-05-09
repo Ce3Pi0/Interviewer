@@ -7,6 +7,8 @@ import { inngest, functions } from "./config/inngest.config.js";
 import { startServer } from "./lib/startServer.js";
 import { serveStatic } from "./lib/serveStatic.js";
 import router from "./routes/index.js";
+import { errorHandler } from "./middleware/errorHandler.middleware.js";
+import { middleware404 } from "./middleware/404.middleware.js";
 
 const app = express();
 
@@ -16,7 +18,12 @@ app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
 app.use(`${ENV.API_SUB_DOMAIN}/inngest`, serve({ client: inngest, functions }));
 app.use(clerkMiddleware()); // This adds auth field to req - req.auth()
 app.use(`${ENV.API_SUB_DOMAIN}`, router);
+// Throw not found for non-existent routes
+app.use(`${ENV.API_SUB_DOMAIN}/{*any}`, middleware404);
 
 serveStatic(app);
+
+//Custom Express Error Handling (Goes after everything)
+app.use(errorHandler);
 
 await startServer(app);
