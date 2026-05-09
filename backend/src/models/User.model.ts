@@ -26,4 +26,6 @@ const userSchema = new mongoose.Schema(
 
 export const User = mongoose.model("User", userSchema);
 
-export type IUserDocument = InferSchemaType<typeof userSchema>;
+export type IUserDocument = InferSchemaType<typeof userSchema> & {
+  _id?: any;
+};
