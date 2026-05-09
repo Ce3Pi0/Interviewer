@@ -6,8 +6,8 @@ const serverStatusRoutes = Router().get(
   "/health",
   asyncHandler(async (_: Request, res: Response) => {
     res.status(HTTP_OK.code).json({
-      msg: "Server is running",
-      status: HTTP_OK.msg,
+      message: "Server is running",
+      status: HTTP_OK.code,
     });
   }),
 );
