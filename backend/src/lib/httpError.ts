@@ -41,6 +41,16 @@ export const HTTP_CONFLICT: THttpError = {
   message: "CONFLICT",
 };
 
+export const HTTP_UNPROCESSABLE_ENTITY: THttpError = {
+  code: HTTP_CODES.UNPROCESSABLE_ENTITY,
+  message: "UNPROCESSABLE ENTITY",
+};
+
+export const HTTP_TOO_MANY_REQUESTS: THttpError = {
+  code: HTTP_CODES.TOO_MANY_REQUESTS,
+  message: "TOO MANY REQUESTS",
+};
+
 export const HTTP_INTERNAL_SERVER_ERROR: THttpError = {
   code: HTTP_CODES.INTERNAL_SERVER_ERROR,
   message: "INTERNAL SERVER ERROR",

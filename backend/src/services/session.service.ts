@@ -11,6 +11,7 @@ import {
 } from "../lib/httpError.js";
 import { Session } from "../models/Session.model.js";
 import { CreateSessionSchemaType } from "../validators/session.validator.js";
+import { ACTIVE_SESSION_POPULATE } from "../config/sessionPopulate.config.js";
 
 export const createSessionService = async (
   userId: string,
@@ -66,7 +67,7 @@ export const createSessionService = async (
 
 export const getActiveSessionsService = async (numOfSessions = 20) => {
   return await Session.find({ status: "active" })
-    .populate("host", "name profileImage")
+    .populate(ACTIVE_SESSION_POPULATE)
     .sort({ createdAt: -1 })
     .limit(numOfSessions);
 };
@@ -79,9 +80,7 @@ export const getMyRecentSessionsService = async (userId: string) => {
 };
 
 export const getSessionByIdService = async (id: string) => {
-  const session = await Session.findById(id)
-    .populate("host", "name email profileImage")
-    .populate("participant", "name email profileImage");
+  const session = await Session.findById(id).populate(ACTIVE_SESSION_POPULATE);
 
   if (!session) throw new HttpError("Session not found", HTTP_NOT_FOUND.code);
 

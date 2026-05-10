@@ -1,4 +1,4 @@
-import { z } from "zod";
+import z from "../config/zod.config.js";
 
 export const createSessionSchema = z.object({
   problem: z.string().trim().min(1),

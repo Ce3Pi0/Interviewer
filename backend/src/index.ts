@@ -9,6 +9,10 @@ import { serveStatic } from "./lib/serveStatic.js";
 import router from "./routes/index.js";
 import { errorHandler } from "./middleware/errorHandler.middleware.js";
 import { middleware404 } from "./middleware/404.middleware.js";
+import {
+  rateLimiter,
+  rateSlowDown,
+} from "./middleware/rateLimiter.middleware.js";
 
 const app = express();
 
@@ -17,6 +21,11 @@ app.use(express.json());
 app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
 app.use(`${ENV.API_SUB_DOMAIN}/inngest`, serve({ client: inngest, functions }));
 app.use(clerkMiddleware()); // This adds auth field to req - req.auth()
+
+// Rate limiters
+app.use(`${ENV.API_SUB_DOMAIN}`, rateLimiter);
+app.use(`${ENV.API_SUB_DOMAIN}`, rateSlowDown);
+
 app.use(`${ENV.API_SUB_DOMAIN}`, router);
 // Throw not found for non-existent routes
 app.use(`${ENV.API_SUB_DOMAIN}/{*any}`, middleware404);
