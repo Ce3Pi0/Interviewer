@@ -141,26 +141,14 @@ export const endSessionService = async (
   if (session.status === "completed")
     throw new HttpError("Session already completed", HTTP_BAD_REQUEST.code);
 
+  const call = streamClient().video.call("default", session.callId);
+  await call.delete({ hard: true });
+
+  const channel = chatClient().channel("messaging", session.callId);
+  await channel.delete();
+
   session.status = "completed";
   await session.save();
 
-  try {
-    const call = streamClient().video.call("default", session.callId);
-    await call.delete({ hard: true });
-
-    const channel = chatClient().channel("messaging", session.callId);
-    await channel.delete();
-
-    return session;
-  } catch (err: unknown) {
-    console.error(err);
-
-    session.status = "active";
-    await session.save();
-
-    throw new HttpError(
-      HTTP_INTERNAL_SERVER_ERROR.message,
-      HTTP_INTERNAL_SERVER_ERROR.code,
-    );
-  }
+  return session;
 };
