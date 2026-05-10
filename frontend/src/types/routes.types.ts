@@ -1,6 +1,6 @@
 import type { JSX } from "react";
 
 export type TRoute = {
-  path: string;
-  element: JSX.Element;
+  readonly path: string;
+  readonly element: JSX.Element;
 };
