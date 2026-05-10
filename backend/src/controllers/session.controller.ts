@@ -8,7 +8,7 @@ export const createSessionController = asyncHandler(
   async (req: Request, res: Response) => {
     const body = createSessionSchema.parse(req.body);
 
-    const userId = req.user!._id;
+    const userId = req.user!._id?.toString()!;
     const clerkId = req.user!.clerkId;
 
     const callId = createSessionService(userId, clerkId, body);
