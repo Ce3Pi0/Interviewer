@@ -1,21 +1,18 @@
-import { Show, SignInButton, SignOutButton, UserButton } from "@clerk/react";
+import { useUser } from "@clerk/react";
+import AppRoutes from "./routes";
+import { Toaster } from "react-hot-toast";
 
 function App() {
+  const { isLoaded } = useUser();
+
+  if (!isLoaded) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
-      <h1>Welcome to the Frontend!</h1>
-
-      <Show when="signed-out">
-        <SignInButton mode="modal">
-          <button>Login</button>
-        </SignInButton>
-      </Show>
-
-      <Show when="signed-in">
-        <SignOutButton />
-      </Show>
-
-      <UserButton />
+      <AppRoutes />
+      <Toaster position="bottom-right" />
     </>
   );
 }
