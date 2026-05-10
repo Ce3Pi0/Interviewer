@@ -4,6 +4,6 @@ import { protectRoute } from "../middleware/protectRoute.middleware.js";
 
 const chatRoutes = Router();
 
-chatRoutes.get("/token", protectRoute, getStreamTokenController);
+chatRoutes.get("/token", getStreamTokenController);
 
 export default chatRoutes;

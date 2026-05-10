@@ -1,13 +1,18 @@
 import { StreamChat, UserResponse } from "stream-chat";
+import { StreamClient } from "@stream-io/node-sdk";
 import { ENV } from "./env.config.js";
+import { checkStreamEnvVars } from "../lib/utils.js";
 
+// Chat features
 export const chatClient = () => {
-  if (!ENV.STREAM_API_KEY || !ENV.STREAM_API_SECRET) {
-    console.error("STREAM_API_KEY or STREAM_API_SECRET is missing");
-    throw new Error("STREAM_API_KEY or STREAM_API_SECRET is missing");
-  }
+  checkStreamEnvVars();
+  return StreamChat.getInstance(ENV.STREAM_API_KEY!, ENV.STREAM_API_SECRET!);
+};
 
-  return StreamChat.getInstance(ENV.STREAM_API_KEY, ENV.STREAM_API_SECRET);
+// Video features
+export const streamClient = () => {
+  checkStreamEnvVars();
+  return new StreamClient(ENV.STREAM_API_KEY!, ENV.STREAM_API_SECRET!);
 };
 
 export const upsertStreamUser = async (userData: UserResponse) => {
@@ -27,5 +32,3 @@ export const deleteStreamUser = async (userId: string) => {
     console.error("Error deleting stream user", err);
   }
 };
-
-// TODO: Add another method to generate token

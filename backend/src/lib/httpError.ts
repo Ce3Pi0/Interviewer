@@ -6,6 +6,11 @@ export const HTTP_OK: THttpError = {
   message: "OK",
 };
 
+export const HTTP_CREATED: THttpError = {
+  code: HTTP_CODES.CREATED,
+  message: "CREATED",
+};
+
 export const HTTP_UNAUTHORIZED: THttpError = {
   code: HTTP_CODES.UNAUTHORIZED,
   message: "UNAUTHORIZED",
