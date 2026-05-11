@@ -11,6 +11,7 @@ const RouteGuard = ({ requiredAuth }: Props) => {
   if (!isLoaded) return <div>Loading...</div>;
 
   if (requiredAuth && !isSignedIn) return <Navigate to="/" />;
+  if (!requiredAuth && isSignedIn) return <Navigate to="/dashboard" />;
 
   return <Outlet />;
 };
