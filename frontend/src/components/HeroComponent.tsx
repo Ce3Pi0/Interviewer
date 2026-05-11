@@ -1,5 +1,7 @@
-import { SignInButton } from "@clerk/react";
-import { ArrowRightIcon, CheckIcon, VideoIcon, ZapIcon } from "lucide-react";
+import { ZapIcon } from "lucide-react";
+import PillComponent from "./PillComponent";
+import StatsComponent from "./StatsComponent";
+import CtaButtonsComponent from "./CtaButtonsComponent";
 
 const HeroComponent = () => {
   return (
@@ -29,51 +31,13 @@ const HeroComponent = () => {
 
           {/* Feature Pills */}
           <div className="flex flex-wrap gap-3">
-            <div className="badge badge-lg badge-outline">
-              <CheckIcon className="size-4 text-success" />
-              Live Video Chat
-            </div>
-            <div className="badge badge-lg badge-outline">
-              <CheckIcon className="size-4 text-success" />
-              Code Editor
-            </div>
-            <div className="badge badge-lg badge-outline">
-              <CheckIcon className="size-4 text-success" />
-              Multi Language
-            </div>
+            <PillComponent text="Live Video Chat" />
+            <PillComponent text="Code Editor" />
+            <PillComponent text="Multi Language" />
           </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-wrap gap-4">
-            <SignInButton mode="modal">
-              <button className="btn btn-primary btn-lg">
-                Start Coding Now
-                <ArrowRightIcon className="size-5" />
-              </button>
-            </SignInButton>
-
-            <button className="btn btn-outline btn-lg">
-              <VideoIcon className="size-5" />
-              Watch Demo
-            </button>
-          </div>
-
-          {/* Stats */}
-          <div className="stats stats-vertical lg:stats-horizontal bg-base-100 shadow-lg">
-            <div className="stat">
-              <div className="stat-value text-primary">10K+</div>
-              <div className="stat-title">Active Users</div>
-            </div>
-            <div className="stat">
-              <div className="stat-value text-secondary">50K+</div>
-              <div className="stat-title">Sessions</div>
-            </div>
-
-            <div className="stat">
-              <div className="stat-value text-accent">99.9%</div>
-              <div className="stat-title">Uptime</div>
-            </div>
-          </div>
+          <CtaButtonsComponent />
+          <StatsComponent />
         </div>
         <img
           src="src/assets/hero.png"

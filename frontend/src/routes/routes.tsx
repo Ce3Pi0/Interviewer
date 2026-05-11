@@ -1,5 +1,6 @@
 import DashboardPage from "../pages/DashboardPage";
 import HomePage from "../pages/HomePage";
+import ProblemsPage from "../pages/ProblemsPage";
 import type { TRoute } from "../types/routes.types";
 
 export const authRoutesPath: TRoute[] = [
@@ -14,11 +15,11 @@ export const authRoutesPath: TRoute[] = [
 ];
 export const protectedRoutesPath: TRoute[] = [
   {
-    path: "/",
+    path: "/dashboard",
     element: <DashboardPage />,
   },
   {
-    path: "/dashboard",
-    element: <DashboardPage />,
+    path: "/problems",
+    element: <ProblemsPage />,
   },
 ];
