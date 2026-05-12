@@ -3,5 +3,5 @@ export type TUser = {
   email: string;
   profileImage: string;
   clerkId: string;
-  type: "interviewer" | "candidate";
+  type: "interviewer" | "interviewee" | undefined;
 };

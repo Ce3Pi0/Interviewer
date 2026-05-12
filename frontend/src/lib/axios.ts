@@ -5,13 +5,22 @@ export const axiosInstance = axios.create({
   withCredentials: true,
 });
 
+let isInterceptorRegistered = false;
+
 export const setupAuthInterceptor = (
   getToken: () => Promise<string | null>,
 ) => {
+  if (isInterceptorRegistered) return;
+  isInterceptorRegistered = true;
+
   axiosInstance.interceptors.request.use(async (config) => {
-    const token = await getToken();
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+    try {
+      const token = await getToken();
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+    } catch (error) {
+      console.error("Failed to get auth token:", error);
     }
     return config;
   });

@@ -1,3 +1,4 @@
+import type { AxiosError } from "axios";
 import { create } from "zustand";
 import type { TUser } from "../types/user.types";
 import { axiosInstance } from "../lib/axios";
@@ -23,20 +24,25 @@ export const userStore = create<UserState>()((set, get) => ({
       set({ user: res.data.user });
 
       toast.success("User type selected successfully!");
-    } catch (err: any) {
-      toast.error(err.response?.data?.message || "User type selection error!");
+    } catch (err: unknown) {
+      const axiosError = err as AxiosError<{ message?: string }>;
+      toast.error(
+        axiosError.response?.data?.message || "User type selection error!",
+      );
     } finally {
       set({ loading: false });
     }
   },
+
   fetchUser: async () => {
     set({ loading: true });
     try {
       const res = await axiosInstance.get("/user/");
 
       set({ user: res.data.user });
-    } catch (err: any) {
-      toast.error(err.response?.data?.message || "User fetching error");
+    } catch (err: unknown) {
+      const axiosError = err as AxiosError<{ message?: string }>;
+      toast.error(axiosError.response?.data?.message || "User fetching error");
     } finally {
       set({ loading: false });
     }

@@ -16,18 +16,15 @@ export const authRoutesPath: TRoute[] = [
 ];
 export const protectedRoutesPath: TRoute[] = [
   {
+    path: "/select-type",
+    element: <SelectTypePage />,
+  },
+  {
     path: "/dashboard",
     element: <DashboardPage />,
   },
   {
     path: "/problems",
     element: <ProblemsPage />,
-  },
-];
-
-export const betweenRoutesPath: TRoute[] = [
-  {
-    path: "/select-type",
-    element: <SelectTypePage />,
   },
 ];

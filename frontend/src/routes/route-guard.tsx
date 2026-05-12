@@ -4,6 +4,7 @@ import Logo from "../components/Logo";
 import { Spinner } from "../components/Spinner";
 import { userStore } from "../hooks/fetchUsers";
 import { useEffect } from "react";
+import { userTypeNotSelected, userTypeSelected } from "../lib/utils";
 
 interface Props {
   requiredAuth: boolean;
@@ -36,16 +37,10 @@ const RouteGuard = ({ requiredAuth }: Props) => {
   if (
     requiredAuth &&
     isSignedIn &&
-    !user &&
-    location.pathname !== "/select-type"
+    userTypeNotSelected(user, location.pathname)
   )
     return <Navigate to="/select-type" />;
-  if (
-    requiredAuth &&
-    isSignedIn &&
-    user &&
-    location.pathname === "/select-type"
-  )
+  if (requiredAuth && isSignedIn && userTypeSelected(user, location.pathname))
     return <Navigate to="/dashboard" />;
 
   return <Outlet />;

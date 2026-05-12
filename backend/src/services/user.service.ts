@@ -12,16 +12,19 @@ export const selectUserTypeService = async (
   id: Types.ObjectId,
   userType: TUserType,
 ) => {
-  const currentUser = await User.findById(id);
+  const updatedUser = await User.findOneAndUpdate(
+    { _id: id, type: { $exists: false } },
+    { $set: { type: userType } },
+    { new: true },
+  );
 
-  if (!currentUser) throw new HttpError("User not found", HTTP_NOT_FOUND.code);
-
-  if (currentUser.type)
+  if (!updatedUser) {
+    const userExists = await User.findById(id);
+    if (!userExists) {
+      throw new HttpError("User not found", HTTP_NOT_FOUND.code);
+    }
     throw new HttpError("User already has a type", HTTP_CONFLICT.code);
+  }
 
-  currentUser.type = userType;
-
-  await currentUser.save();
-
-  return currentUser;
+  return updatedUser;
 };

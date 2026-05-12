@@ -1,6 +1,6 @@
 import StatComponent from "./StatComponent";
 
-//TODO: Fetch real data and change uptime to problem count
+//TODO: Fetch real data from backend
 
 const StatsComponent = () => {
   return (
