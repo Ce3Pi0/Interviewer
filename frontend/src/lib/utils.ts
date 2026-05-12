@@ -1,5 +1,3 @@
-import type { TUser } from "../types/user.types";
-
 export const getDifficultyBadgeClass = (difficulty: string) => {
   switch (difficulty.toLowerCase()) {
     case "easy":
@@ -22,12 +20,4 @@ export const getUserTypeBadgeClass = (type: string) => {
     default:
       return "from-primary";
   }
-};
-
-export const userTypeSelected = (user: TUser | null, path: string) => {
-  return user && user.type && path === "/select-type";
-};
-
-export const userTypeNotSelected = (user: TUser | null, path: string) => {
-  return (!user || !user.type) && path !== "/select-type";
 };

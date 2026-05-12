@@ -14,7 +14,7 @@ interface UserState {
 
 export const userStore = create<UserState>()((set, get) => ({
   user: null,
-  loading: false,
+  loading: true,
 
   selectUserType: async (userType) => {
     set({ loading: true });
