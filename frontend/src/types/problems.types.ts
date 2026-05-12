@@ -1,14 +1,15 @@
+export type TDifficulty = "easy" | "medium" | "hard";
+
 type Example = {
   input: string;
   output: string;
   explanation?: string;
 };
 
-export type Problem = {
-  id: string;
+export type TCreateProblem = {
   title: string;
-  difficulty: "Easy" | "Medium" | "Hard";
-  category: string;
+  difficulty: TDifficulty;
+  category?: string;
   description: {
     text: string;
     notes: string[];
@@ -25,4 +26,13 @@ export type Problem = {
     python: string;
     java: string;
   };
+};
+export type TProblem = TCreateProblem & { _id: string };
+
+export const LANGUAGES = ["javascript", "python", "java"] as const;
+export type Language = (typeof LANGUAGES)[number];
+export const LANG_LABELS: Record<Language, string> = {
+  javascript: "JavaScript",
+  python: "Python",
+  java: "Java",
 };

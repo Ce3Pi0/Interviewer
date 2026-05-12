@@ -1,33 +1,76 @@
 import Navbar from "../components/Navbar";
 
-import { PROBLEMS } from "../data/problems";
-import type { Problem } from "../types/problems.types";
 import ProblemsFooter from "../components/ProblemsFooter";
 import ProblemComponent from "../components/ProblemComponent";
+import { problemsStore } from "../hooks/fetchProblems";
+import { useEffect, useState } from "react";
+import { userStore } from "../hooks/fetchUsers";
+import ProblemsHeader from "../components/ProblemsHeader";
+import { Spinner } from "../components/Spinner";
+import type { TDifficulty } from "../types/problems.types";
+import { getDifficultyTextColor } from "../lib/utils";
 
 const ProblemsPage = () => {
-  const problems: Problem[] = Object.values(PROBLEMS);
+  const { user } = userStore();
+  const { fetchProblems, problems, problemsLoading } = problemsStore();
+
+  const [filter, setFilter] = useState<TDifficulty | "">("");
+
+  useEffect(() => {
+    fetchProblems();
+  }, [fetchProblems]);
+
+  const filteredProblems = problems?.filter((problem) => {
+    if (!filter) {
+      return true;
+    }
+    return problem.difficulty === filter;
+  });
 
   return (
     <div className="min-h-screen bg-base-200">
       <Navbar />
 
       <div className="max-w-6xl mx-auto px-4 py-12">
-        <header className="mb-8">
-          <h1 className="text-4xl font-bold mb-2">Practice Problems</h1>
+        <ProblemsHeader
+          headerType="view"
+          userType={user?.type}
+          title="Practice Problems"
+          description="Sharpen your coding skills with these curated problems"
+          to="/problems/new"
+          btnText="Create a New Problem"
+        />
+        <select
+          className={`select select-bordered mb-6 ${getDifficultyTextColor(filter)}`}
+          onChange={(e) => setFilter(e.target.value as TDifficulty | "")}
+        >
+          <option className="text-white" value="">
+            All
+          </option>
+          <option className={`${getDifficultyTextColor("easy")}`} value="easy">
+            Easy
+          </option>
+          <option
+            className={`${getDifficultyTextColor("medium")}`}
+            value="medium"
+          >
+            Medium
+          </option>
+          <option className={`${getDifficultyTextColor("hard")}`} value="hard">
+            Hard
+          </option>
+        </select>
 
-          <p className="text-base-content/70">
-            Sharpen your coding skills with these curated problems
-          </p>
-        </header>
+        {problemsLoading && !problems && <Spinner />}
+        {filteredProblems && (
+          <div className="space-y-4">
+            {filteredProblems.map((problem) => (
+              <ProblemComponent problem={problem} key={problem._id} />
+            ))}
+          </div>
+        )}
 
-        <div className="space-y-4">
-          {problems.map((problem) => (
-            <ProblemComponent problem={problem} key={problem.id} />
-          ))}
-        </div>
-
-        <ProblemsFooter problems={problems} />
+        {problems && <ProblemsFooter problems={problems} />}
       </div>
     </div>
   );

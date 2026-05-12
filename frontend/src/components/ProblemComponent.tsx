@@ -1,16 +1,16 @@
 import { Link } from "react-router";
-import type { Problem } from "../types/problems.types";
+import type { TProblem } from "../types/problems.types";
 import { ChevronRightIcon, Code2Icon } from "lucide-react";
-import { getDifficultyBadgeClass } from "../lib/utils";
+import { capitalize, getDifficultyBadgeClass } from "../lib/utils";
 
 interface Props {
-  problem: Problem;
+  problem: TProblem;
 }
 
 const ProblemComponent = ({ problem }: Props) => {
   return (
     <Link
-      to={`/problem/${problem.id}`}
+      to={`/problem/${problem._id}`}
       className="card bg-base-100 hover:scale-[1.01] transition-transform"
     >
       <div className="card-body">
@@ -28,7 +28,7 @@ const ProblemComponent = ({ problem }: Props) => {
                   <span
                     className={`badge ${getDifficultyBadgeClass(problem.difficulty)}`}
                   >
-                    {problem.difficulty}
+                    {capitalize(problem.difficulty)}
                   </span>
                 </div>
 
