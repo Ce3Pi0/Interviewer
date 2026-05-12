@@ -20,6 +20,11 @@ const userSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    type: {
+      type: String,
+      enum: ["interviewer", "interviewee"],
+      default: null,
+    },
   },
   { timestamps: true }, // createdAt & updatedAt
 );

@@ -65,6 +65,10 @@ export const createSessionService = async (
   }
 };
 
+export const getCountSessionsService = async () => {
+  return await Session.countDocuments({}).exec();
+};
+
 export const getActiveSessionsService = async (numOfSessions = 20) => {
   return await Session.find({ status: "active" })
     .populate(ACTIVE_SESSION_POPULATE)

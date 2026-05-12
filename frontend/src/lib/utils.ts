@@ -10,3 +10,14 @@ export const getDifficultyBadgeClass = (difficulty: string) => {
       return "badge-ghost";
   }
 };
+
+export const getUserTypeBadgeClass = (type: string) => {
+  switch (type.toLowerCase()) {
+    case "interviewer":
+      return "from-info";
+    case "interviewee":
+      return "from-warning";
+    default:
+      return "from-primary";
+  }
+};

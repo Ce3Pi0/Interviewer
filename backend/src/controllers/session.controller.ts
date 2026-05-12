@@ -6,6 +6,7 @@ import {
 } from "../validators/session.validator.js";
 import { HTTP_CREATED, HTTP_OK } from "../lib/httpError.js";
 import {
+  getCountSessionsService,
   createSessionService,
   endSessionService,
   getActiveSessionsService,
@@ -26,6 +27,13 @@ export const createSessionController = asyncHandler(
     return res
       .status(HTTP_CREATED.code)
       .json({ msg: "Session created", session });
+  },
+);
+
+export const getCountSessionsController = asyncHandler(
+  async (_: Request, res: Response) => {
+    const count = await getCountSessionsService();
+    return res.status(HTTP_OK.code).json({ count });
   },
 );
 

@@ -1,8 +1,12 @@
-import { BookOpenIcon, LayoutDashboardIcon } from "lucide-react";
+import {
+  BookOpenIcon,
+  LayoutDashboardIcon,
+  LucideUserSearch,
+} from "lucide-react";
 import { Link, useLocation } from "react-router";
 
 interface Props {
-  path: "/problems" | "/dashboard";
+  path: "/problems" | "/dashboard" | "/select-type";
   title: string;
 }
 
@@ -19,6 +23,7 @@ const NavLinkComponent = ({ path, title }: Props) => {
       <div className="flex items-center gap-x-2.5">
         {path === "/problems" && <BookOpenIcon className="size-4" />}{" "}
         {path === "/dashboard" && <LayoutDashboardIcon className="size-4" />}{" "}
+        {path === "/select-type" && <LucideUserSearch className="size-4" />}{" "}
         <span className="font-medium hidden sm:inline">{title}</span>
       </div>
     </Link>

@@ -1,6 +1,10 @@
 import { Route, Routes } from "react-router";
 import RouteGuard from "./route-guard";
-import { authRoutesPath, protectedRoutesPath } from "./routes";
+import {
+  authRoutesPath,
+  betweenRoutesPath,
+  protectedRoutesPath,
+} from "./routes";
 
 const AppRoutes = () => {
   return (
@@ -13,6 +17,12 @@ const AppRoutes = () => {
 
       <Route path="/" element={<RouteGuard requiredAuth={true} />}>
         {protectedRoutesPath.map((route, index) => (
+          <Route key={index} path={route.path} element={route.element} />
+        ))}
+      </Route>
+
+      <Route path="/" element={<RouteGuard requiredAuth={true} />}>
+        {betweenRoutesPath.map((route, index) => (
           <Route key={index} path={route.path} element={route.element} />
         ))}
       </Route>
