@@ -13,7 +13,8 @@ interface Props {
 const NavLinkComponent = ({ path, title }: Props) => {
   const location = useLocation();
 
-  const isActive = (path: string): boolean => location.pathname === path;
+  const isActive = (path: string): boolean =>
+    location.pathname.startsWith(path);
 
   return (
     <Link

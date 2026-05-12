@@ -1,3 +1,4 @@
+import CreateNewProblemPage from "../pages/CreateNewProblemPage";
 import DashboardPage from "../pages/DashboardPage";
 import HomePage from "../pages/HomePage";
 import ProblemsPage from "../pages/ProblemsPage";
@@ -26,5 +27,9 @@ export const protectedRoutesPath: TRoute[] = [
   {
     path: "/problems",
     element: <ProblemsPage />,
+  },
+  {
+    path: "/problems/new",
+    element: <CreateNewProblemPage />,
   },
 ];

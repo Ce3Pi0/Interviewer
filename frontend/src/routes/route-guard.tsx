@@ -22,7 +22,6 @@ const RouteGuard = ({ requiredAuth }: Props) => {
     }
     fetchUser();
   }, [fetchUser, isLoaded, isSignedIn, user]);
-
   if (loading || !isLoaded) {
     return (
       <div className="flex flex-col items-center justify-center h-screen gap-2">

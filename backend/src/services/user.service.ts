@@ -13,7 +13,7 @@ export const selectUserTypeService = async (
   userType: TUserType,
 ) => {
   const updatedUser = await User.findOneAndUpdate(
-    { _id: id, type: { $exists: false } },
+    { _id: id, type: null },
     { $set: { type: userType } },
     { new: true },
   );

@@ -1,7 +1,7 @@
-import type { Problem } from "../types/problems.types";
+import type { TProblem } from "../types/problems.types";
 
 interface Props {
-  problems: Problem[];
+  problems: TProblem[];
 }
 
 const ProblemsFooter = ({ problems }: Props) => {

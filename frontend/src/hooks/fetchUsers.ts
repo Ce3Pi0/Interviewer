@@ -12,7 +12,7 @@ interface UserState {
   fetchUser: () => void;
 }
 
-export const userStore = create<UserState>()((set, get) => ({
+export const userStore = create<UserState>()((set) => ({
   user: null,
   loading: true,
 

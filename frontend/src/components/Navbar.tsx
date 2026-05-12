@@ -4,7 +4,7 @@ import NavbarLeftComponent from "./NavbarLeftComponent";
 import NavLinkComponent from "./NavLinkComponent";
 import { UserButton } from "@clerk/react";
 import { userStore } from "../hooks/fetchUsers";
-import { getUserTypeBadgeClass } from "../lib/utils";
+import { capitalize, getUserTypeBadgeClass } from "../lib/utils";
 
 const Navbar = () => {
   const { user } = userStore();
@@ -37,9 +37,9 @@ const Navbar = () => {
           <div className="ml-4 mt-2">
             {user?.type && (
               <span
-                className={`font-black text-xl bg-linear-to-r ${getUserTypeBadgeClass(user.type || "")} to-accent bg-clip-text text-transparent font-mono tracking-wider`}
+                className={`font-black text-xl bg-linear-to-r ${getUserTypeBadgeClass(user.type)} to-accent bg-clip-text text-transparent font-mono tracking-wider`}
               >
-                {user.type?.charAt(0).toUpperCase() + user.type?.slice(1)}
+                {capitalize(user.type)}
               </span>
             )}
           </div>
