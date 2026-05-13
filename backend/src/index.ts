@@ -21,7 +21,9 @@ checkRapidApiEnvVars();
 
 // Middlewares
 app.use(express.json());
-app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
+app.use(
+  cors({ origin: ENV.CLIENT_URL, credentials: true, methods: ["GET", "POST"] }),
+);
 app.use(`${ENV.API_SUB_DOMAIN}/inngest`, serve({ client: inngest, functions }));
 app.use(clerkMiddleware()); // This adds auth field to req - req.auth()
 

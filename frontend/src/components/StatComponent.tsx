@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { statsStore } from "../hooks/fetchStats";
+import { statsStore } from "../hooks/useStats";
 import { getCorrectStatData, getCorrectStatLoading } from "../lib/utils";
 import { Spinner } from "./Spinner";
 

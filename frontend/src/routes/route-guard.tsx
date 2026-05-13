@@ -2,7 +2,7 @@ import { useAuth } from "@clerk/react";
 import { Navigate, Outlet, useLocation } from "react-router";
 import Logo from "../components/Logo";
 import { Spinner } from "../components/Spinner";
-import { userStore } from "../hooks/fetchUsers";
+import { userStore } from "../hooks/useUsers";
 import { useEffect } from "react";
 
 interface Props {

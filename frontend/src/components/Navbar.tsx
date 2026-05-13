@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import NavbarLeftComponent from "./NavbarLeftComponent";
 import NavLinkComponent from "./NavLinkComponent";
 import { UserButton } from "@clerk/react";
-import { userStore } from "../hooks/fetchUsers";
+import { userStore } from "../hooks/useUsers";
 import { capitalize, getUserTypeBadgeClass } from "../lib/utils";
 
 const Navbar = () => {
