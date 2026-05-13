@@ -14,7 +14,8 @@ const NavLinkComponent = ({ path, title }: Props) => {
   const location = useLocation();
 
   const isActive = (path: string): boolean =>
-    location.pathname.startsWith(path);
+    location.pathname.startsWith(path) ||
+    (location.pathname.startsWith("/problem") && path === "/problems");
 
   return (
     <Link

@@ -13,8 +13,11 @@ import {
   rateLimiter,
   rateSlowDown,
 } from "./middleware/rateLimiter.middleware.js";
+import { checkRapidApiEnvVars } from "./lib/utils.js";
 
 const app = express();
+
+checkRapidApiEnvVars();
 
 // Middlewares
 app.use(express.json());

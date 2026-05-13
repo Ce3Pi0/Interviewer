@@ -1,3 +1,6 @@
+import jsIcon from "../assets/javascript.png";
+import pyIcon from "../assets/python.png";
+import javaIcon from "../assets/java.png";
 import type { TCreateProblem } from "../types/problems.types";
 
 export const getDifficultyBadgeClass = (difficulty: string) => {
@@ -106,19 +109,25 @@ export const initialFormData: TCreateProblem = {
 };
 
 export const LANGUAGE_CONFIG = {
-  javascript: {
-    name: "JavaScript",
-    icon: "/javascript.png",
-    monacoLang: "javascript",
-  },
-  python: {
-    name: "Python",
-    icon: "/python.png",
-    monacoLang: "python",
-  },
-  java: {
-    name: "Java",
-    icon: "/java.png",
-    monacoLang: "java",
-  },
+  javascript: { name: "JavaScript", icon: jsIcon, monacoLang: "javascript" },
+  python: { name: "Python", icon: pyIcon, monacoLang: "python" },
+  java: { name: "Java", icon: javaIcon, monacoLang: "java" },
+};
+
+export const normalizeOutput = (output?: string) => {
+  return output
+    ?.trim()
+    .split("\n")
+    .flatMap((line) => {
+      const normalized = line
+        .trim()
+        .replace(/\[\s+/g, "[")
+        .replace(/\s+\]/g, "]")
+        .replace(/\s*,\s*/g, ",");
+      const matches = normalized.match(/\[[^\]]*\]/g);
+      if (matches && matches.length > 1) return matches;
+      return [normalized];
+    })
+    .filter((line) => line.length > 0)
+    .join("\n");
 };

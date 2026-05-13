@@ -41,6 +41,11 @@ export const HTTP_CONFLICT: THttpError = {
   message: "CONFLICT",
 };
 
+export const HTTP_CONTENT_TOO_LARGE: THttpError = {
+  code: HTTP_CODES.CONTENT_TOO_LARGE,
+  message: "CONTENT TOO LARGE",
+};
+
 export const HTTP_UNPROCESSABLE_ENTITY: THttpError = {
   code: HTTP_CODES.UNPROCESSABLE_ENTITY,
   message: "UNPROCESSABLE ENTITY",
