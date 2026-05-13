@@ -3,7 +3,7 @@ import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import type { Language } from "../types/problems.types";
-import { problemsStore } from "../hooks/fetchProblems";
+import { problemsStore } from "../hooks/useProblems";
 import Navbar from "../components/Navbar";
 import ProblemDescriptionComponent from "../components/problem/ProblemDescriptionComponent";
 import CodeEditorPanelComponent from "../components/problem/CodeEditorPanelComponent";

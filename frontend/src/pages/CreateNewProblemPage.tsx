@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import Navbar from "../components/Navbar";
-import { userStore } from "../hooks/fetchUsers";
+import { userStore } from "../hooks/useUsers";
 import { Navigate } from "react-router";
 import type { Language, TCreateProblem } from "../types/problems.types";
 
@@ -12,7 +12,7 @@ import ConstraintsComponent from "../components/create-problem-components/Constr
 import StarterCodeComponent from "../components/create-problem-components/StarterCodeComponent";
 import ExpectedOutputComponent from "../components/create-problem-components/ExpectedOutputComponent";
 import { initialFormData } from "../lib/utils";
-import { problemsStore } from "../hooks/fetchProblems";
+import { problemsStore } from "../hooks/useProblems";
 import { Spinner } from "../components/Spinner";
 import toast from "react-hot-toast";
 

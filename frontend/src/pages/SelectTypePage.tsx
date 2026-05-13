@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar";
-import { userStore } from "../hooks/fetchUsers";
+import { userStore } from "../hooks/useUsers";
 
 const SelectTypePage = () => {
   const { selectUserType } = userStore();

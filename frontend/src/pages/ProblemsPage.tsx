@@ -2,9 +2,9 @@ import Navbar from "../components/Navbar";
 
 import ProblemsFooter from "../components/ProblemsFooter";
 import ProblemComponent from "../components/ProblemComponent";
-import { problemsStore } from "../hooks/fetchProblems";
+import { problemsStore } from "../hooks/useProblems";
 import { useEffect, useState } from "react";
-import { userStore } from "../hooks/fetchUsers";
+import { userStore } from "../hooks/useUsers";
 import ProblemsHeader from "../components/ProblemsHeader";
 import { Spinner } from "../components/Spinner";
 import type { TDifficulty } from "../types/problems.types";
