@@ -8,8 +8,8 @@ interface UserState {
   user: TUser | null;
   loading: boolean;
 
-  selectUserType: (userType: "interviewer" | "interviewee") => void;
-  fetchUser: () => void;
+  selectUserType: (userType: "interviewer" | "interviewee") => Promise<void>;
+  fetchUser: () => Promise<void>;
 }
 
 export const userStore = create<UserState>()((set) => ({

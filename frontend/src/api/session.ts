@@ -6,15 +6,14 @@ import type {
 } from "../types/session.type";
 
 interface SessionState {
-  createSession: (data: TSession) => Promise<TReturnSession | undefined>;
-  getActiveSessions: () => Promise<TReturnSessions | undefined>;
-  getMyRecentSessions: () => Promise<TReturnSessions | undefined>;
-  getSessionById: (id: string) => Promise<TReturnSession | undefined>;
-  joinSession: (id: string) => Promise<TReturnSession | undefined>;
-  endSession: (id: string) => Promise<TReturnSession | undefined>;
-  getStreamToken: () => Promise<string | undefined>;
+  createSession: (data: TSession) => Promise<TReturnSession>;
+  getActiveSessions: () => Promise<TReturnSessions>;
+  getMyRecentSessions: () => Promise<TReturnSessions>;
+  getSessionById: (id: string) => Promise<TReturnSession>;
+  joinSession: (id: string) => Promise<TReturnSession>;
+  endSession: (id: string) => Promise<TReturnSession>;
+  getStreamToken: () => Promise<string>;
 }
-
 export const sessionApi: SessionState = {
   createSession: async (data) => {
     const res = await axiosInstance.post("/session", data);

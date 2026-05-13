@@ -38,7 +38,7 @@ export const problemsStore = create<ProblemsState>()((set, get) => ({
       const res = await axiosInstance.post("/problem/", problem);
       toast.success("Problem created successfully!");
 
-      set({ problems: [...get().problems!, res.data.problem] });
+      set({ problems: [...(get().problems || []), res.data.problem] });
       return true;
     } catch (err: unknown) {
       const axiosError = err as AxiosError<{ message?: string }>;

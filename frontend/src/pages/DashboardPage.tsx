@@ -9,6 +9,7 @@ import {
   useMyRecentSessions,
 } from "../hooks/useSession";
 import WelcomeSection from "../components/dashboard/WelcomeSection";
+import toast from "react-hot-toast";
 
 const DashboardPage = () => {
   const navigate = useNavigate();
@@ -17,13 +18,22 @@ const DashboardPage = () => {
   const [roomConfig, setRoomConfig] = useState<TSession>();
 
   const createSessionMutation = useCreateSession();
-  const { data: activeSessionsData, isLoading: loadingActiveSessions } =
-    useActiveSessions();
-  const { data: recentSessionsData, isLoading: loadingRecentSessions } =
-    useMyRecentSessions();
+  const {
+    data: activeSessionsData,
+    isLoading: loadingActiveSessions,
+    error: activeSessionsError,
+  } = useActiveSessions();
+  const {
+    data: recentSessionsData,
+    isLoading: loadingRecentSessions,
+    error: recentSessionsError,
+  } = useMyRecentSessions();
 
   const handleCreateRoom = () => {
-    if (!roomConfig) return;
+    if (!roomConfig) {
+      toast.error("Session details not provided");
+      return;
+    }
 
     createSessionMutation.mutate(
       {
