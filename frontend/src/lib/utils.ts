@@ -131,3 +131,8 @@ export const normalizeOutput = (output?: string) => {
     .filter((line) => line.length > 0)
     .join("\n");
 };
+
+export const getFirstName = (fullName?: string) => {
+  if (!fullName?.trim()) return "Unknown";
+  return fullName.trim().split(" ").at(0);
+};

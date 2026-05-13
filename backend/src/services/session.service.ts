@@ -15,11 +15,11 @@ import { ACTIVE_SESSION_POPULATE } from "../config/sessionPopulate.config.js";
 import { User } from "../models/User.model.js";
 
 export const createSessionService = async (
-  userId: string,
+  userId: Types.ObjectId,
   clerkId: string,
   body: CreateSessionSchemaType,
 ) => {
-  const user = await User.findById({ id: userId });
+  const user = await User.findById(userId);
   if (user?.type !== "interviewer")
     throw new HttpError(
       "Only interviewers can create sessions",
@@ -84,13 +84,12 @@ export const getActiveSessionsService = async (numOfSessions = 20) => {
     .limit(numOfSessions);
 };
 
-export const getMyRecentSessionsService = async (userId: string) => {
+export const getMyRecentSessionsService = async (userId: Types.ObjectId) => {
   return await Session.find({
     status: "completed",
     $or: [{ host: userId }, { participant: userId }],
   });
 };
-
 export const getSessionByIdService = async (id: string) => {
   const session = await Session.findById(id).populate(ACTIVE_SESSION_POPULATE);
 
@@ -104,6 +103,13 @@ export const joinSessionService = async (
   userId: Types.ObjectId,
   clerkId: string,
 ) => {
+  const user = await User.findById(userId);
+  if (user?.type !== "interviewee")
+    throw new HttpError(
+      "Only interviewees can join sessions",
+      HTTP_NOT_ALLOWED.code,
+    );
+
   const session = await Session.findById(id);
 
   if (!session) throw new HttpError("Session not found", HTTP_NOT_FOUND.code);

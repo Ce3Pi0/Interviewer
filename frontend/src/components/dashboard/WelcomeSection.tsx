@@ -1,12 +1,14 @@
-import { useUser } from "@clerk/react";
 import { ArrowRightIcon, SparklesIcon, ZapIcon } from "lucide-react";
+import type { TUserTypes } from "../../types/user.types";
+import { userStore } from "../../hooks/useUsers";
+import { getFirstName } from "../../lib/utils";
 
 interface Props {
   onCreateSession: () => void;
 }
 
 const WelcomeSection = ({ onCreateSession }: Props) => {
-  const { user } = useUser();
+  const { user } = userStore();
 
   return (
     <div className="relative overflow-hidden">
@@ -18,23 +20,25 @@ const WelcomeSection = ({ onCreateSession }: Props) => {
                 <SparklesIcon className="w-6 h-6 text-white" />
               </div>
               <h1 className="text-5xl font-black bg-linear-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-                Welcome back, {user?.firstName || "there"}
+                Welcome back, {getFirstName(user?.name) || "there"}
               </h1>
             </div>
             <p className="text-xl text-base-content/60 ml-16">
               Ready to level up your coding skills?
             </p>
           </div>
-          <button
-            onClick={onCreateSession}
-            className="group px-8 py-4 bg-linear-to-r from-primary to-secondary rounded-2xl transition-all duration-200 hover:opacity-90"
-          >
-            <div className="flex items-center gap-3 text-white font-bold text-lg">
-              <ZapIcon className="w-6 h-6" />
-              <span>Create Session</span>
-              <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </div>
-          </button>
+          {user?.type === "interviewer" && (
+            <button
+              onClick={onCreateSession}
+              className="group px-8 py-4 bg-linear-to-r from-primary to-secondary rounded-2xl transition-all duration-200 hover:opacity-90"
+            >
+              <div className="flex items-center gap-3 text-white font-bold text-lg">
+                <ZapIcon className="w-6 h-6" />
+                <span>Create Session</span>
+                <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </button>
+          )}
         </div>
       </div>
     </div>

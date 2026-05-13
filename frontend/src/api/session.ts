@@ -2,11 +2,11 @@ import { axiosInstance } from "../lib/axios";
 import type {
   TReturnSession,
   TReturnSessions,
-  TSession,
+  TSendSession,
 } from "../types/session.type";
 
 interface SessionState {
-  createSession: (data: TSession) => Promise<TReturnSession>;
+  createSession: (data: TSendSession) => Promise<TReturnSession>;
   getActiveSessions: () => Promise<TReturnSessions>;
   getMyRecentSessions: () => Promise<TReturnSessions>;
   getSessionById: (id: string) => Promise<TReturnSession>;
