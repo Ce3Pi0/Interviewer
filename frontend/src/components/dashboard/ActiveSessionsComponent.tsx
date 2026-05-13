@@ -15,12 +15,14 @@ import { userStore } from "../../hooks/useUsers";
 interface Props {
   sessions: TSession[];
   isLoading: boolean;
+  error: Error | null;
   isUserInSession: (session: TSession) => boolean;
 }
 
 const ActiveSessionsComponent = ({
   sessions,
   isLoading,
+  error,
   isUserInSession,
 }: Props) => {
   const { user } = userStore();
@@ -47,6 +49,15 @@ const ActiveSessionsComponent = ({
         <div className="space-y-3 max-h-100 overflow-y-auto pr-2">
           {isLoading ? (
             <Spinner className="size-10" />
+          ) : error !== null ? (
+            <div className="text-center py-16">
+              <div className="w-20 h-20 mx-auto mb-4 bg-error/20 rounded-3xl flex items-center justify-center">
+                <SparklesIcon className="w-10 h-10 text-error/50" />
+              </div>
+              <p className="text-lg font-semibold opacity-70 mb-1">
+                Error Fetching Active Sessions
+              </p>
+            </div>
           ) : sessions.length > 0 ? (
             sessions.map((s) => (
               <div

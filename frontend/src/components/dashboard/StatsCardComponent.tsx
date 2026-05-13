@@ -17,7 +17,9 @@ const StatsCardComponent = ({
             <div className="p-3 bg-primary/10 rounded-2xl">
               <UsersIcon className="w-7 h-7 text-primary" />
             </div>
-            <div className="badge badge-primary">Live</div>
+            {activeSessionsCount > 0 && (
+              <div className="badge badge-primary">Live</div>
+            )}
           </div>
           <div className="text-4xl font-black mb-1">{activeSessionsCount}</div>
           <div className="text-sm opacity-60">Active Sessions</div>

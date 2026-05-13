@@ -6,10 +6,11 @@ import { getDifficultyBadgeClass } from "../../lib/utils";
 
 interface Props {
   sessions: TSession[];
+  error: Error | null;
   isLoading: boolean;
 }
 
-const RecentSessionsComponent = ({ sessions, isLoading }: Props) => {
+const RecentSessionsComponent = ({ sessions, error, isLoading }: Props) => {
   return (
     <div className="card bg-base-100 border-2 border-accent/20 hover:border-accent/30 mt-8">
       <div className="card-body">
@@ -24,6 +25,15 @@ const RecentSessionsComponent = ({ sessions, isLoading }: Props) => {
           {isLoading ? (
             <div className="col-span-full flex items-center justify-center py-20">
               <Spinner className="w-10 h-10" />
+            </div>
+          ) : error === null ? (
+            <div className="col-span-full text-center py-16">
+              <div className="w-20 h-20 mx-auto mb-4 bg-error/20 rounded-3xl flex items-center justify-center">
+                <Trophy className="w-10 h-10 text-error/50" />
+              </div>
+              <p className="text-lg font-semibold opacity-70 mb-1">
+                Error Fetching Recent Sessions
+              </p>
             </div>
           ) : sessions.length > 0 ? (
             sessions.map((session) => (

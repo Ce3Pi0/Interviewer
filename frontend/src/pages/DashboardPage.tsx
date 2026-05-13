@@ -77,6 +77,7 @@ const DashboardPage = () => {
             />
             <ActiveSessionsComponent
               sessions={activeSessions}
+              error={activeSessionsError}
               isLoading={loadingActiveSessions}
               isUserInSession={isUserInSession}
             />
@@ -84,6 +85,7 @@ const DashboardPage = () => {
 
           <RecentSessionsComponent
             sessions={recentSessions}
+            error={recentSessionsError}
             isLoading={loadingRecentSessions}
           />
         </div>
