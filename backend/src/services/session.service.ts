@@ -12,12 +12,20 @@ import {
 import { Session } from "../models/Session.model.js";
 import { CreateSessionSchemaType } from "../validators/session.validator.js";
 import { ACTIVE_SESSION_POPULATE } from "../config/sessionPopulate.config.js";
+import { User } from "../models/User.model.js";
 
 export const createSessionService = async (
   userId: string,
   clerkId: string,
   body: CreateSessionSchemaType,
 ) => {
+  const user = await User.findById({ id: userId });
+  if (user?.type !== "interviewer")
+    throw new HttpError(
+      "Only interviewers can create sessions",
+      HTTP_NOT_ALLOWED.code,
+    );
+
   const { problem, difficulty } = body;
 
   const uuid = crypto.randomUUID();
