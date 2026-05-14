@@ -13,14 +13,7 @@ import {
   MessageList,
   Thread,
   Window,
-  WithComponents,
-  AttachmentPreviewList,
-  AttachmentSelector,
-  LinkPreviewList,
   MessageComposer,
-  QuotedMessagePreview,
-  TextareaComposer,
-  WithDragAndDropUpload,
 } from "stream-chat-react";
 import { Spinner } from "./Spinner";
 import { MessageSquareIcon, UsersIcon, XIcon } from "lucide-react";
