@@ -13,7 +13,8 @@
 Interviewing platform for carrying out real-time interviews between interviewers and interviewees.
 
 
-Live Demo: https://interviewer-f9pz.onrender.com/ 
+Live Demo: https://interviewer-f9pz.onrender.com/
+
 Repository: https://github.com/Ce3Pi0/Interviewer
 
 ---
@@ -208,9 +209,27 @@ Create .env files in both frontend and backend:
   | POST | /api/v1/execute/ | Execute Code |
 
 
-- ### Data Flow Example
+- ### Data Flows
 
-  # CREATE DATA FLOWS!!!
+  - Creating Session Data Flow
+ 
+    <img width="491" height="461" alt="CreatingSessionDataFlow" src="https://github.com/user-attachments/assets/abeb7c3c-2018-4cd7-b560-345d81b102aa" />
+
+  - Joining Session Data Flow
+ 
+    <img width="491" height="561" alt="JoiningSessionDataFlow" src="https://github.com/user-attachments/assets/324e58f4-cb99-4195-bfab-e2da2a211592" />
+
+  - Leaving Session Data Flow
+ 
+    <img width="421" height="272" alt="LeavingSessionDataFlow" src="https://github.com/user-attachments/assets/a58c54a5-e3ff-47cc-8022-720aad24aa7e" />
+
+  - Rejoin Session Data Flow
+ 
+    <img width="571" height="702" alt="RejoinSessionDataFlow" src="https://github.com/user-attachments/assets/8d1519a3-6d79-40e9-80a8-46c0075f6171" />
+
+  - Ending Session Data Flow
+ 
+    <img width="667" height="741" alt="EndSessionDataFlow" src="https://github.com/user-attachments/assets/4c461df1-24be-4eab-87a4-0ce845b17b58" />
 
  
 <a id="database-design"></a>
@@ -318,7 +337,33 @@ cd backend && npm run start
 <a id="screenshots"></a>
 ## Screenshots:
 
-# INCLUDE SCREENSHOTS!!!
+- ### Home Page
+
+  <img width="812" height="847" alt="image" src="https://github.com/user-attachments/assets/540ae691-ec61-4c2a-8e3a-9c05262840ea" />
+
+- ### Select Type
+
+  <img width="1277" height="816" alt="image" src="https://github.com/user-attachments/assets/30df49ac-ba37-4359-8780-4bfb9b0e4156" />
+
+- ### Dashboard Page
+
+  <img width="995" height="752" alt="image" src="https://github.com/user-attachments/assets/4ad07a7e-f03e-491c-982f-d45b687aee2e" />
+
+- ### Problems Page
+
+  <img width="807" height="812" alt="image" src="https://github.com/user-attachments/assets/68b38312-0ae3-4aea-9c2c-970babe9635e" />
+
+- ### Create New Problem Page
+
+  <img width="530" height="817" alt="image" src="https://github.com/user-attachments/assets/1c105fa0-3c56-4414-b2b1-0d8244d39c00" />
+
+- ### Problem Page
+
+  <img width="1877" height="856" alt="image" src="https://github.com/user-attachments/assets/ff576812-6a9a-4766-aa17-230ea635e768" />
+
+- ### Session Page
+
+  <img width="1887" height="862" alt="image" src="https://github.com/user-attachments/assets/ea3fcd96-c62d-41e3-89fa-b2fde6d3ec6b" />
 
 <a id="built-with"></a>
 ## Built With
