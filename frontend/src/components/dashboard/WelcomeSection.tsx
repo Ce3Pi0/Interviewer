@@ -1,5 +1,5 @@
 import { ArrowRightIcon, SparklesIcon, ZapIcon } from "lucide-react";
-import { USER_TYPE, type TUserTypes } from "../../types/user.types";
+import { USER_TYPE } from "../../types/user.types";
 import { userStore } from "../../hooks/useUsers";
 import { getFirstName } from "../../lib/utils";
 

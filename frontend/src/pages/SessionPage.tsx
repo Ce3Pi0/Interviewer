@@ -40,7 +40,7 @@ const SessionPage = () => {
 
   const { user } = useUser();
 
-  const { problems, fetchProblems, problemsLoading } = problemsStore();
+  const { problems, fetchProblems } = problemsStore();
 
   const [output, setOutput] = useState<TExecuteCode | null | undefined>(null);
   const [isRunning, setIsRunning] = useState(false);
