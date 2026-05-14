@@ -19,7 +19,7 @@ export const createSessionController = asyncHandler(
   async (req: Request, res: Response) => {
     const body = createSessionSchema.parse(req.body);
 
-    const userId = req.user!._id!.toString();
+    const userId = req.user!._id!;
     const clerkId = req.user!.clerkId;
 
     const session = await createSessionService(userId, clerkId, body);
@@ -49,7 +49,7 @@ export const getActiveSessionsController = asyncHandler(
 
 export const getMyRecentSessionsController = asyncHandler(
   async (req: Request, res: Response) => {
-    const userId = req.user!._id!.toString()!;
+    const userId = req.user!._id!;
 
     const sessions = await getMyRecentSessionsService(userId);
 

@@ -1,10 +1,18 @@
 import jsIcon from "../assets/javascript.png";
 import pyIcon from "../assets/python.png";
 import javaIcon from "../assets/java.png";
-import type { TCreateProblem } from "../types/problems.types";
+import type {
+  Language,
+  TCreateProblem,
+  TProblem,
+} from "../types/problems.types";
+import type { TExecuteCode } from "../types/executeCode.types";
+import confetti from "canvas-confetti";
+import { executeCode } from "./executeCode";
+import toast from "react-hot-toast";
 
-export const getDifficultyBadgeClass = (difficulty: string) => {
-  switch (difficulty.toLowerCase()) {
+export const getDifficultyBadgeClass = (difficulty?: string) => {
+  switch (difficulty?.toLowerCase()) {
     case "easy":
       return "badge-success";
     case "medium":
@@ -16,8 +24,8 @@ export const getDifficultyBadgeClass = (difficulty: string) => {
   }
 };
 
-export const getDifficultyTextColor = (difficulty: string) => {
-  switch (difficulty.toLowerCase()) {
+export const getDifficultyTextColor = (difficulty?: string) => {
+  switch (difficulty?.toLowerCase()) {
     case "easy":
       return "text-success";
     case "medium":
@@ -135,4 +143,73 @@ export const normalizeOutput = (output?: string) => {
 export const getFirstName = (fullName?: string) => {
   if (!fullName?.trim()) return "Unknown";
   return fullName.trim().split(" ").at(0);
+};
+
+export const handleLanguageChange = (
+  e: React.ChangeEvent<HTMLSelectElement>,
+  problem: TProblem | null | undefined,
+  setSelectedLanguage: React.Dispatch<React.SetStateAction<Language>>,
+  setCode: React.Dispatch<React.SetStateAction<string | undefined>>,
+  setOutput: React.Dispatch<
+    React.SetStateAction<TExecuteCode | null | undefined>
+  >,
+) => {
+  const newLang: Language = e.target.value as Language;
+  setSelectedLanguage(newLang);
+  setCode(problem?.starterCode[newLang]);
+  setOutput(null);
+};
+
+export const triggerConfetti = () => {
+  confetti({
+    particleCount: 80,
+    spread: 250,
+    origin: { x: 0.2, y: 0.6 },
+  });
+  confetti({
+    particleCount: 80,
+    spread: 250,
+    origin: { x: 0.8, y: 0.6 },
+  });
+};
+
+export const checkIfTestsPassed = (
+  actualOutput?: string,
+  expectedOutput?: string,
+) => {
+  const normalizedActual = normalizeOutput(actualOutput);
+  const normalizedExpected = normalizeOutput(expectedOutput);
+
+  return normalizedActual === normalizedExpected;
+};
+
+export const handleRunCode = async (
+  setIsRunning: React.Dispatch<React.SetStateAction<boolean>>,
+  setOutput: React.Dispatch<
+    React.SetStateAction<TExecuteCode | null | undefined>
+  >,
+  selectedLanguage: Language,
+  code?: string,
+  currentProblem?: TProblem,
+) => {
+  setIsRunning(true);
+  setOutput(null);
+
+  const result = await executeCode(selectedLanguage, code || "");
+
+  setOutput(result);
+  setIsRunning(false);
+
+  if (result.success) {
+    const expectedOutput = currentProblem?.expectedOutput[selectedLanguage];
+
+    const testsPassed = checkIfTestsPassed(result.output, expectedOutput);
+
+    if (testsPassed) {
+      triggerConfetti();
+      toast.success("All tests passed!");
+    } else toast.error("Tests failed; check your output!");
+  } else {
+    toast.error("Code execution failed!");
+  }
 };

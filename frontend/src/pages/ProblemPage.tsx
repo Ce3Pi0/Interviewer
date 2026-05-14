@@ -1,4 +1,3 @@
-import confetti from "canvas-confetti";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
@@ -8,10 +7,8 @@ import Navbar from "../components/Navbar";
 import ProblemDescriptionComponent from "../components/problem/ProblemDescriptionComponent";
 import CodeEditorPanelComponent from "../components/problem/CodeEditorPanelComponent";
 import OutputPanelComponent from "../components/problem/OutputPanelComponent";
-import { executeCode } from "../lib/executeCode";
-import toast from "react-hot-toast";
 import type { TExecuteCode } from "../types/executeCode.types";
-import { normalizeOutput } from "../lib/utils";
+import { handleLanguageChange, handleRunCode } from "../lib/utils";
 
 const ProblemPage = () => {
   const { id } = useParams();
@@ -27,8 +24,8 @@ const ProblemPage = () => {
   const [isRunning, setIsRunning] = useState(false);
 
   useEffect(() => {
-    fetchProblems();
-  }, [fetchProblems]);
+    if (!problems) fetchProblems();
+  }, [problems, fetchProblems]);
 
   const currentProblem = problems?.find((problem) => problem._id === id);
 
@@ -46,60 +43,8 @@ const ProblemPage = () => {
 
   if (!id) return null;
 
-  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newLang: Language = e.target.value as Language;
-    setSelectedLanguage(newLang);
-    setCode(currentProblem?.starterCode[newLang]);
-    setOutput(null);
-  };
   const handleProblemChange = (newProblemId: string) =>
     navigate(`/problem/${newProblemId}`);
-
-  const triggerConfetti = () => {
-    confetti({
-      particleCount: 80,
-      spread: 250,
-      origin: { x: 0.2, y: 0.6 },
-    });
-    confetti({
-      particleCount: 80,
-      spread: 250,
-      origin: { x: 0.8, y: 0.6 },
-    });
-  };
-
-  const checkIfTestsPassed = (
-    actualOutput?: string,
-    expectedOutput?: string,
-  ) => {
-    const normalizedActual = normalizeOutput(actualOutput);
-    const normalizedExpected = normalizeOutput(expectedOutput);
-
-    return normalizedActual === normalizedExpected;
-  };
-
-  const handleRunCode = async () => {
-    setIsRunning(true);
-    setOutput(null);
-
-    const result = await executeCode(selectedLanguage, code || "");
-
-    setOutput(result);
-    setIsRunning(false);
-
-    if (result.success) {
-      const expectedOutput = currentProblem?.expectedOutput[selectedLanguage];
-
-      const testsPassed = checkIfTestsPassed(result.output, expectedOutput);
-
-      if (testsPassed) {
-        triggerConfetti();
-        toast.success("All tests passed!");
-      } else toast.error("Tests failed; check your output!");
-    } else {
-      toast.error("Code execution failed!");
-    }
-  };
 
   return (
     <div className="h-screen bg-base-100 flex flex-col">
@@ -124,9 +69,25 @@ const ProblemPage = () => {
                   selectedLanguage={selectedLanguage}
                   code={code}
                   isRunning={isRunning}
-                  onLanguageChange={handleLanguageChange}
+                  onLanguageChange={(e) =>
+                    handleLanguageChange(
+                      e,
+                      currentProblem,
+                      setSelectedLanguage,
+                      setCode,
+                      setOutput,
+                    )
+                  }
                   onCodeChange={setCode}
-                  onRunCode={handleRunCode}
+                  onRunCode={() =>
+                    handleRunCode(
+                      setIsRunning,
+                      setOutput,
+                      selectedLanguage,
+                      code,
+                      currentProblem,
+                    )
+                  }
                 />
               </Panel>
 

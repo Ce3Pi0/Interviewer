@@ -35,7 +35,7 @@ app.use(`${ENV.API_SUB_DOMAIN}`, router);
 // Throw not found for non-existent routes
 app.use(`${ENV.API_SUB_DOMAIN}/{*any}`, middleware404);
 
-serveStatic(app);
+if (ENV.NODE_ENV === "production") serveStatic(app);
 
 //Custom Express Error Handling (Goes after everything)
 app.use(errorHandler);

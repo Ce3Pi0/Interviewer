@@ -11,6 +11,7 @@ import { Spinner } from "../Spinner";
 import { capitalize, getDifficultyBadgeClass } from "../../lib/utils";
 import { Link } from "react-router";
 import { userStore } from "../../hooks/useUsers";
+import { USER_TYPE } from "../../types/user.types";
 
 interface Props {
   sessions: TSession[];
@@ -106,8 +107,17 @@ const ActiveSessionsComponent = ({
                       </div>
                     </div>
                   </div>
-
-                  {s.participant && !isUserInSession(s) ? (
+                  {user?.type === USER_TYPE.INTERVIEWER ? (
+                    isUserInSession(s) ? (
+                      <Link
+                        to={`/sessions/${s._id}`}
+                        className="btn btn-primary btn-sm gap-2"
+                      >
+                        Rejoin
+                        <ArrowRightIcon className="size-4" />
+                      </Link>
+                    ) : null
+                  ) : s.participant && !isUserInSession(s) ? (
                     <button className="btn btn-disabled btn-sm" disabled>
                       Full
                     </button>
@@ -131,7 +141,7 @@ const ActiveSessionsComponent = ({
               <p className="text-lg font-semibold opacity-70 mb-1">
                 No active sessions
               </p>
-              {user?.type === "interviewer" ? (
+              {user?.type === USER_TYPE.INTERVIEWER ? (
                 <p className="text-sm opacity-50">
                   Be the first to create one!
                 </p>

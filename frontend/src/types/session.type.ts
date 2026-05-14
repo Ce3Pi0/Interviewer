@@ -1,4 +1,4 @@
-import type { TDifficulty, TProblem } from "./problems.types";
+import type { TDifficulty } from "./problems.types";
 import type { TUser } from "./user.types";
 
 export type TReturnSessions = {
@@ -7,6 +7,13 @@ export type TReturnSessions = {
 
 export type TReturnSession = {
   session: TSession;
+};
+
+export type TStreamToken = {
+  token: string;
+  userId: string;
+  userName: string;
+  userImage: string;
 };
 
 export type TSendSession = {
@@ -26,4 +33,10 @@ export type TSession = {
   callId: string | null;
   createdAt: string;
   updatedAt: string;
+};
+
+export type TStreamUser = {
+  id: string;
+  name: string;
+  image: string;
 };

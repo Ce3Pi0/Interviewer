@@ -14,7 +14,9 @@ export const protectRoute = async (
   if (!userId)
     throw new HttpError(HTTP_UNAUTHORIZED.message, HTTP_UNAUTHORIZED.code);
 
-  const user: IUserDocument | null = await User.findOne({ clerkId: userId });
+  const user: IUserDocument | null = await User.findOne({
+    clerkId: userId,
+  });
 
   if (!user) throw new HttpError("User not found", HTTP_NOT_FOUND.code);
 

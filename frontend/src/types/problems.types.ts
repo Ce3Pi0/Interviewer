@@ -1,6 +1,6 @@
 export type TDifficulty = "easy" | "medium" | "hard";
 
-type Example = {
+export type Example = {
   input: string;
   output: string;
   explanation?: string;

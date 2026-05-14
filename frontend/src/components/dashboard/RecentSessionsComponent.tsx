@@ -26,7 +26,7 @@ const RecentSessionsComponent = ({ sessions, error, isLoading }: Props) => {
             <div className="col-span-full flex items-center justify-center py-20">
               <Spinner className="w-10 h-10" />
             </div>
-          ) : error === null ? (
+          ) : error !== null ? (
             <div className="col-span-full text-center py-16">
               <div className="w-20 h-20 mx-auto mb-4 bg-error/20 rounded-3xl flex items-center justify-center">
                 <Trophy className="w-10 h-10 text-error/50" />

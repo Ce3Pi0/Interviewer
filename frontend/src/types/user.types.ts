@@ -7,3 +7,8 @@ export type TUser = {
   clerkId: string;
   type: TUserTypes;
 };
+
+export const USER_TYPE = {
+  INTERVIEWER: "interviewer",
+  INTERVIEWEE: "interviewee",
+} as const;
