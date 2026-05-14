@@ -1,9 +1,9 @@
 import { ENV } from "../config/env.config.js";
 import { HttpError } from "../config/httpError.config.js";
 import {
-  HTTP_BAD_REQUEST,
   HTTP_INTERNAL_SERVER_ERROR,
   HTTP_CONTENT_TOO_LARGE,
+  HTTP_UNPROCESSABLE_ENTITY,
 } from "../lib/httpError.js";
 import { EXIT_CODES, getErrMessage, LANGUAGE_MAP } from "../lib/utils.js";
 import { Language, RapidAPIResponse } from "../types/code.types.js";
@@ -12,7 +12,7 @@ const MAX_FILE_SIZE = 100000; // 100KB
 
 export const executeCodeService = async (language: Language, code: string) => {
   if (!code || !code.trim()) {
-    throw new HttpError("Code cannot be empty", HTTP_BAD_REQUEST.code);
+    throw new HttpError("Code cannot be empty", HTTP_UNPROCESSABLE_ENTITY.code);
   }
   if (code.length > MAX_FILE_SIZE) {
     throw new HttpError(
