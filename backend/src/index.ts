@@ -28,6 +28,8 @@ app.use(`${ENV.API_SUB_DOMAIN}/inngest`, serve({ client: inngest, functions }));
 app.use(clerkMiddleware()); // This adds auth field to req - req.auth()
 
 // Rate limiters
+if (ENV.NODE_ENV === "production") app.set("trust proxy", 1); // Render is behind a proxy
+
 app.use(`${ENV.API_SUB_DOMAIN}`, rateLimiter);
 app.use(`${ENV.API_SUB_DOMAIN}`, rateSlowDown);
 

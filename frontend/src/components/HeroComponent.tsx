@@ -1,3 +1,5 @@
+import HeroImage from "../assets/hero.png";
+
 import { ZapIcon } from "lucide-react";
 import PillComponent from "./PillComponent";
 import StatsComponent from "./StatsComponent";
@@ -40,7 +42,7 @@ const HeroComponent = () => {
           <StatsComponent />
         </div>
         <img
-          src="src/assets/hero.png"
+          src={HeroImage}
           alt="Interviewer Platform"
           className="w-full h-auto rounded-3xl shadow-2xl border-4 border-base-100 hover:scale-105 transition-transform duration-500"
         />
