@@ -17,8 +17,8 @@ const ProblemsPage = () => {
   const [filter, setFilter] = useState<TDifficulty | "">("");
 
   useEffect(() => {
-    fetchProblems();
-  }, [fetchProblems]);
+    if (!problems) fetchProblems();
+  }, [problems, fetchProblems]);
 
   const filteredProblems = problems?.filter((problem) => {
     if (!filter) {

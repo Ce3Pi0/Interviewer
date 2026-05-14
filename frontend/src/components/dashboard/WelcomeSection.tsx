@@ -1,5 +1,5 @@
 import { ArrowRightIcon, SparklesIcon, ZapIcon } from "lucide-react";
-import type { TUserTypes } from "../../types/user.types";
+import { USER_TYPE, type TUserTypes } from "../../types/user.types";
 import { userStore } from "../../hooks/useUsers";
 import { getFirstName } from "../../lib/utils";
 
@@ -27,7 +27,7 @@ const WelcomeSection = ({ onCreateSession }: Props) => {
               Ready to level up your coding skills?
             </p>
           </div>
-          {user?.type === "interviewer" && (
+          {user?.type === USER_TYPE.INTERVIEWER && (
             <button
               onClick={onCreateSession}
               className="group px-8 py-4 bg-linear-to-r from-primary to-secondary rounded-2xl transition-all duration-200 hover:opacity-90"

@@ -3,6 +3,7 @@ import type {
   TReturnSession,
   TReturnSessions,
   TSendSession,
+  TStreamToken,
 } from "../types/session.type";
 
 interface SessionState {
@@ -12,7 +13,7 @@ interface SessionState {
   getSessionById: (id: string) => Promise<TReturnSession>;
   joinSession: (id: string) => Promise<TReturnSession>;
   endSession: (id: string) => Promise<TReturnSession>;
-  getStreamToken: () => Promise<string>;
+  getStreamToken: () => Promise<TStreamToken>;
 }
 export const sessionApi: SessionState = {
   createSession: async (data) => {

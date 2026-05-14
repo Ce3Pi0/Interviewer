@@ -4,6 +4,7 @@ import HomePage from "../pages/HomePage";
 import ProblemPage from "../pages/ProblemPage";
 import ProblemsPage from "../pages/ProblemsPage";
 import SelectTypePage from "../pages/SelectTypePage";
+import SessionPage from "../pages/SessionPage";
 import type { TRoute } from "../types/routes.types";
 
 export const authRoutesPath: TRoute[] = [
@@ -36,5 +37,9 @@ export const protectedRoutesPath: TRoute[] = [
   {
     path: "/problem/:id",
     element: <ProblemPage />,
+  },
+  {
+    path: "/sessions/:id",
+    element: <SessionPage />,
   },
 ];

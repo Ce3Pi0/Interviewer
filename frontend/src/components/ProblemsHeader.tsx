@@ -1,5 +1,6 @@
 import { ArrowLeftIcon, Plus } from "lucide-react";
 import { Link } from "react-router";
+import { USER_TYPE } from "../types/user.types";
 
 interface Props {
   headerType: "create" | "view";
@@ -19,7 +20,7 @@ const ProblemsHeader = ({
   btnText,
 }: Props) => {
   const shouldShowButton = () =>
-    (userType === "interviewer" && headerType === "view") ||
+    (userType === USER_TYPE.INTERVIEWER && headerType === "view") ||
     headerType === "create";
 
   return (
